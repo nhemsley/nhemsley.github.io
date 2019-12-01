@@ -27,10 +27,10 @@ task :publish => [:all] do
   git = Git.open(output_dir)
   
   remote = git.remotes.first.url
+  puts "Publishing to #{remote}"
 
+  binding.pry
   Dir.chdir(output_dir) do
-    `git remote -v`
-    puts "Publishing to #{remote}"
    `git add .`
    `git add -u .`
    `git commit -m 'publish'`
