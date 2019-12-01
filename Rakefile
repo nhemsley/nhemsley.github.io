@@ -29,12 +29,15 @@ task :publish => [:all] do
   remote = git.remotes.first.url
   puts "Publishing to #{remote}"
 
-  binding.pry
-  Dir.chdir(output_dir) do
-   `git add .`
-   `git add -u .`
-   `git commit -m 'publish'`
-   `git push origin master`
-  end
+  git.add(all: true)
+  git.commit('publish')
+  git.push
+  # binding.pry
+  # Dir.chdir(output_dir) do
+  #  `git add .`
+  #  `git add -u .`
+  #  `git commit -m 'publish'`
+  #  `git push origin master`
+  # end
 
 end
