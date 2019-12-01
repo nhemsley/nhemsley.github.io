@@ -1,4 +1,4 @@
-import cloud from './cloud.js'
+import cloud from './lib/cloud.js'
 
 cloud();
 
