@@ -17,7 +17,6 @@ end
 task :resume2pdf do
   output_dir = Pathname.new(CONFIG['destination'] || '_site')
   output_file = "resume-#{full_name_for_file}.pdf"
-  binding.pry
   Dir.chdir(output_dir) do
     `wkhtmltopdf --disable-javascript resume-pdf.html #{output_file}`
   end
