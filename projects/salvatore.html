@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>  Salvatore Fluid Simulation |  CV</title>
+  <link href="./media/nhemsley-screen.css?14b0198cbec09d8076c03856d89a40b1" type="text/css" rel="stylesheet" media="screen, print">
+  <link href="http://fonts.googleapis.com/css?family=Arimo&subset=latin" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div id="main">
+    <div id="content" class='container'>
+    <h1 id="numerical-fluid-simulation-of-breaking-waves-over-contoured-sea-floor">Numerical Fluid Simulation of Breaking waves over contoured sea floor</h1>
+
+<p>This was my first foray into the Rust programming language, prompted primarily by the availability of the <a href="https://github.com/dimforge/salva">Salva crate</a>, released by <a href="https://dimforge.com">Dimforge</a>.</p>
+
+<p>Any public code related to this was contributed under the github user <a href="https://github.com/rezural">rezural</a></p>
+
+<h2 id="core-simulation">Core simulation</h2>
+
+<p>Salvatore modeled the environment that the fluid existed in as a large pool, with the bathymetry provided to salva as a triangle mesh. This mesh was initially generated from a grayscale heightmap png/jpg.</p>
+
+<p>Salva models the boundaries of the environment as static particles, with movement disabled. Boundaries, and water particles are modeled using particles, with salva providing methods to generate the boundary particles, from shape objects.</p>
+
+<h2 id="challenges">Challenges</h2>
+
+<p>This project presented various challenges, largely due to the volume of data produced per-frame, and the inability of visualization tools to deal with such large data sets. The volume of data per frame, simply overwhelms the throughput capabilities of current hardware.</p>
+
+<h2 id="output-format">Output format</h2>
+
+<p>The output from the simulation is the spatial position of each particle, for each time step, with each time step being stored in a simple .ply file. This resulted in a 600mb file for each time step, of a realistic simulation world.</p>
+
+<p>While Paraviz was able to deal with this amount of data, it was not real-time in any sense.</p>
+
+<h2 id="conversion-to-triangle-mesh">Conversion to Triangle Mesh</h2>
+
+<p><a href="https://www.floeschner.de/splashsurf/">Splashsurf</a> (<a href="https://github.com/w1th0utnam3/splashsurf">github</a>) is utilized to convert the .ply files, to .stl mesh files. These files were still on the order of 150mb per frame. Post processing, using meshlab’s mesh decimation functionality, reduced the file sizes further, to around 30mb.</p>
+
+<h2 id="visualization-of-results">Visualization of results</h2>
+
+<p>I decided to create a <a href="https://github.com/rezural/mesh-ripper">mesh visualization software</a>, that given a directory, would animate through a directory of numbered .stl files. This was written using the excellent, and very performant <a href="https://bevyengine.org/">Bevy</a> game engine.</p>
+
+<p>This was my first foray into using the bevy game engine, and the architecture shows. The program however, performs quite well.</p>
+
+<h1 id="visualization-videos">Visualization Videos</h1>
+
+<h2 id="scar-reef">Scar Reef</h2>
+
+<p>I created two bathymetries, one modeled on a surfing reef named <a href="https://goo.gl/maps/LkrFv69goCMKMxN39">Scar Reef</a>, in Sumbawa.</p>
+
+<p>This is a video of the wave simulated for about 15 seconds real time, from various aerial perspectives:</p>
+
+<iframe width="640" height="480" src="https://www.youtube.com/embed/1qv63IPZ1tM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+
+<h2 id="hollow-left-hander">Hollow Left hander</h2>
+
+<p>The second bathymetry I created, was intended to create a steeper reef edge, and consequently a steeper wave breaking style. In surfing terminology, a hollower wave.</p>
+
+<p>Video of external view of the wave breaking:</p>
+
+<iframe width="640" height="480" src="https://www.youtube.com/embed/orD-Gmtphlo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+
+<p>Inside view, from within the breaking wave, the ‘tube’:</p>
+
+<iframe width="640" height="480" src="https://www.youtube.com/embed/iOcfvxlKDXg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+
+    </div>
+  </div>
+  <script src="/assets/javascript/main.js?14b0198cbec09d8076c03856d89a40b1"></script>
+</body>
+</html>
